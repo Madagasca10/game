@@ -1,33 +1,22 @@
-public class Main {
+const cardBoard = document.querySelector("#cardboard");
+const images = [
+	'bat.svg',
+	'canguru.svg',
+	'cat.svg',
+    'lion.svg',
+	'scorpion.svg',
+	'hawk.svg',
+]
 
-	public static void main(String[] args) {
-		
+let cardHTML = '';//cria o próprio HTML com as imagens
 
-		System.out.println("::::::: Teste 1 :::::::");
-		testarExcecoesDoCarro();
-		System.out.println("::::::: Teste 2 :::::::");
-		testarExcecoesDoAviao();
-		System.out.println("::::::: Teste 3 :::::::");
-		testarExcecoesDoAviaoNumCarro();
-		
-		// podemos alterar ao valor de minAbcissa na iAnda?
-		// iAnda.minAbcissa = 3;
-	}
+images.forEach(img => {
+	cardHTML += `
+	<div>
+         <img src="img/${img}">
+		 <img src="img/js-badge.svg">
+	<div>
+	`
+})
 
-	public static void testarExcecoesDoCarro() {
-		Carro c = new Carro(1);
-
-		char movimento = 'r'; // supor que foi perguntado ao utilizador...
-		int distancia = 5; // supor que foi perguntado ao utilizador...
-
-		try {
-			switch (movimento) { 
-			case 'a':
-				c.avancar(distancia);
-				break;
-			case 'r':
-				c.recuar(distancia);
-				break;
-			default:
-				break;
-			}
+cardBoard.innerHTML = cardHTML;
