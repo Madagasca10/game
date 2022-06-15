@@ -5,13 +5,17 @@ import {draw as foodDraw, update as foodUpdate} from './food/food.js'
 
 let lastTimeRender = 0;
 
-let gameOver = false;
 
 //milisegundos
 function main(currentTime) {
 
-  if (gameOver) {
-	alert('perdeste');
+  if (checkGameOver()) {
+	if(confirm('perdeste')) {
+		window.location.reload();
+	} else {
+		window.requestAnimationFrame(main);
+	}
+return;
   }
 
 	window,requestAnimationFrame(main);
@@ -31,7 +35,7 @@ function update() {
 	gameboard.innerHTML ='';
 	snakeUpdate();
 	foodUpdate();
-	checkGameOver();
+	
 };
 
 function draw() {
@@ -40,9 +44,8 @@ function draw() {
 };
 
 function checkGameOver() {
-   if(isOutsideBoard(getSnakeHead())  || hasSnakeSelfCollision()) {
-	gameOver = true;
-   }
+   return isOutsideBoard(getSnakeHead()) || hasSnakeSelfCollision();
+   
 }
 
 window.requestAnimationFrame()
