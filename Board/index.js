@@ -8,3 +8,8 @@ function generateRandowBoardPosition() {
       y: Math.floor(Math.random() * BOARD_SIZE + 1,
   }
 }
+
+export function isOutsideBoard(position) {
+    return position.x > BOARD_SIZE || position.x < 1 ||
+           position.y > BOARD_SIZE || position.y <1;
+}

@@ -1,9 +1,15 @@
 import {gameboard, generateRandowBoardPosition} from '../Board/index.js';
-import { collision as snakeCollision} from '../Cobra/index.js';
+import { collision as snakeCollision, expandSnake} from '../Cobra/index.js';
+
+const EXPANSION_RATE = 2;
 
 let foodPosition = generateRandowPosition();
 
 export function update() {
+    if(snakeCollision(foodPosition)) {
+        expandSnake(EXPANSION_RATE)
+        foodPosition = generateRandowPosition();
+    }
 };
 
 

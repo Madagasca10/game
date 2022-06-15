@@ -1,13 +1,18 @@
-import { gameboard } from './Board/index.js';
-import { SNAKE_SPEED, draw as snakeDraw, update as snakeUpdate } from './Cobra/index.js'
+import { gameboard, isOutsideBoard } from './Board/index.js';
+import { SNAKE_SPEED, draw as snakeDraw, update as snakeUpdate, getSnakeHead, hasSelfCollision as hasSnakeSelfCollision } from './Cobra/index.js'
 import {draw as foodDraw, update as foodUpdate} from './food/food.js'
 
-const SNAKE_SPEED = 5;
 
 let lastTimeRender = 0;
 
+let gameOver = false;
+
 //milisegundos
 function main(currentTime) {
+
+  if (gameOver) {
+	alert('perdeste');
+  }
 
 	window,requestAnimationFrame(main);
 
@@ -26,11 +31,18 @@ function update() {
 	gameboard.innerHTML ='';
 	snakeUpdate();
 	foodUpdate();
+	checkGameOver();
 };
 
 function draw() {
 	snakeUpdate();
 	foodDraw();
 };
+
+function checkGameOver() {
+   if(isOutsideBoard(getSnakeHead())  || hasSnakeSelfCollision()) {
+	gameOver = true;
+   }
+}
 
 window.requestAnimationFrame()
